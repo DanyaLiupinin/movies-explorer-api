@@ -7,6 +7,13 @@ const updateUserValidation = celebrate({
   }),
 });
 
+const getUserValidation = celebrate({
+  params: Joi.object().keys({
+    userId: Joi.string().hex().length(24),
+  }),
+});
+
 module.exports = {
   updateUserValidation,
+  getUserValidation,
 };
