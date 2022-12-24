@@ -3,6 +3,11 @@ const express = require('express');
 
 const app = express();
 app.listen(3000);
+const userRouter = require('./routes/users');
+const movieRouter = require('./routes/movies');
+
+app.use('/users', userRouter); // перенести в routes/index.js и подключить сюда
+app.use('/movies', movieRouter);
 
 /*
 const bodyParser = require('body-parser');
