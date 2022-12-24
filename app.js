@@ -5,9 +5,15 @@ const app = express();
 app.listen(3000);
 const userRouter = require('./routes/users');
 const movieRouter = require('./routes/movies');
+const errorHandler = require('./middlewares/errorHandler');
+// const { requestLogger, errorLogger } = require('./middlewares/logger');
+
+// app.use(requestLogger);
 
 app.use('/users', userRouter); // перенести в routes/index.js и подключить сюда
 app.use('/movies', movieRouter);
+
+app.use(errorHandler());
 
 /*
 const bodyParser = require('body-parser');
