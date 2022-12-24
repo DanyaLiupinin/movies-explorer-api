@@ -10,7 +10,7 @@ const getUser = (req, res, next) => {
       throw new NotFoundError('Пользователь с таким id не найден');
     })
     .then((user) => {
-      res.send({ data: user });
+      res.send(user);
     })
     .catch((error) => {
       if (error.name === 'CastError') {
