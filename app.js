@@ -1,26 +1,32 @@
 const express = require('express');
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const app = express();
-app.listen(3000);
-const userRouter = require('./routes/users');
-const movieRouter = require('./routes/movies');
+const { errors } = require('celebrate');
+const bodyParser = require('body-parser');
 const errorHandler = require('./middlewares/errorHandler');
+
 // const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+const userRouter = require('./routes/users');
+const movieRouter = require('./routes/movies');
+
 // app.use(requestLogger);
+mongoose.set('strictQuery', true);
+mongoose.connect('mongodb://localhost:27017/movies-explorer');
+app.listen(3000);
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  req.user = {
+    _id: '63a7282bafd386d05f0102e3',
+  };
+
+  next();
+});
 
 app.use('/users', userRouter); // перенести в routes/index.js и подключить сюда
 app.use('/movies', movieRouter);
 
-app.use(errorHandler());
-
-/*
-const bodyParser = require('body-parser');
-
-const { errors } = require('celebrate');
-
-mongoose.connect('mongodb://localhost:27017/mestodb');
-
-app.use(bodyParser.json());
-*/
+app.use(errors());
+app.use(errorHandler);

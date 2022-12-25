@@ -11,3 +11,5 @@ const {
 
 userRouter.get('/me', getUserValidation, getUser);
 userRouter.patch('/me', updateUserValidation, updateUser);
+
+module.exports = userRouter;
