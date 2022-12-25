@@ -6,12 +6,11 @@ const { errors } = require('celebrate');
 const bodyParser = require('body-parser');
 const errorHandler = require('./middlewares/errorHandler');
 
-// const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const userRouter = require('./routes/users');
 const movieRouter = require('./routes/movies');
 
-// app.use(requestLogger);
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb://localhost:27017/movies-explorer');
 app.listen(3000);
@@ -28,5 +27,7 @@ app.use((req, res, next) => {
 app.use('/users', userRouter); // перенести в routes/index.js и подключить сюда
 app.use('/movies', movieRouter);
 
+app.use(requestLogger);
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
