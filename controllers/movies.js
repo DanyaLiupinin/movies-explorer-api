@@ -62,7 +62,7 @@ const deleteMovie = (req, res, next) => {
       throw new NotFoundError('Фильм с таким id не существует');
     })
     .then((movie) => {
-      const movieOwnerId = movie.owner._id;
+      const movieOwnerId = movie.owner.toString();
       if (req.user._id === movieOwnerId) {
         Movies.deleteOne(movie)
           .then(() => {
