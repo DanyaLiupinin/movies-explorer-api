@@ -11,6 +11,6 @@ const {
 const { auth } = require('../middlewares/auth');
 
 userRouter.get('/me', auth, getUserValidation, getUser);
-userRouter.patch('/me', updateUserValidation, updateUser);
+userRouter.patch('/me', auth, updateUserValidation, updateUser);
 
 module.exports = userRouter;
