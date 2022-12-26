@@ -7,6 +7,8 @@ const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
 const status = require('../utils/status');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const getUser = (req, res, next) => {
   const userId = req.user._id;
   User.findById(userId)

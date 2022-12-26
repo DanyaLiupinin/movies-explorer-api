@@ -11,7 +11,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const userRouter = require('./routes/users');
 const movieRouter = require('./routes/movies');
-const { createUser } = require('./controllers/users');
+const { createUser, login } = require('./controllers/users');
 
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb://localhost:27017/movies-explorer');
@@ -34,14 +34,12 @@ app.post('/signup', celebrate({
   }),
 }), createUser);
 
-/*
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), login);
-*/
 
 app.use('/users', userRouter); // перенести в routes/index.js и подключить сюда
 app.use('/movies', movieRouter);
