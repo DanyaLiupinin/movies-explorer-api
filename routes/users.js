@@ -8,8 +8,9 @@ const {
   updateUserValidation,
   getUserValidation,
 } = require('../middlewares/validation');
+const { auth } = require('../middlewares/auth');
 
-userRouter.get('/me', getUserValidation, getUser);
+userRouter.get('/me', auth, getUserValidation, getUser);
 userRouter.patch('/me', updateUserValidation, updateUser);
 
 module.exports = userRouter;
