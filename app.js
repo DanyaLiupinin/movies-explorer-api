@@ -21,14 +21,6 @@ mongoose.connect('mongodb://localhost:27017/movies-explorer');
 app.listen(3000);
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
-  req.user = {
-    _id: '63a7282bafd386d05f0102e3',
-  };
-
-  next();
-});
-
 app.post('/signup', createUserValidation, createUser);
 
 app.post('/signin', loginValidation, login);
