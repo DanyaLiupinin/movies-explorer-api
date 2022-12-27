@@ -6,10 +6,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { router } = require('./routes/index');
 const rateLimit = require('./middlewares/rateLimiter');
+const options = require('./utils/corsOptions');
+
+app.use('*', cors(options));
 
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
@@ -23,7 +27,5 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-// cors
-// проверить роуты
 // файл env на сервер
 // написть readme
