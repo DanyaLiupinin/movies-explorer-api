@@ -13,10 +13,13 @@ const { router } = require('./routes/index');
 const rateLimit = require('./middlewares/rateLimiter');
 const options = require('./utils/corsOptions');
 
+const { DATA_BASE_PROD, NODE_ENV } = process.env;
+const { DATA_BASE_DEV } = require('./utils/constants');
+
 app.use('*', cors(options));
 
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+mongoose.connect(NODE_ENV === 'production' ? DATA_BASE_PROD : DATA_BASE_DEV);
 app.listen(3000);
 app.use(bodyParser.json());
 app.use(rateLimit);
