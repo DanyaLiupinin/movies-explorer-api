@@ -9,12 +9,11 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { router } = require('./routes/index');
+const router = require('./routes/index');
 const rateLimit = require('./middlewares/rateLimiter');
 const options = require('./utils/corsOptions');
 
-const { NODE_ENV, MONGO_URL } = process.env;
-const { DATA_BASE_DEV } = require('./utils/constants');
+const { MONGO_URL } = process.env;
 
 app.use('*', cors(options));
 
