@@ -13,13 +13,13 @@ const { router } = require('./routes/index');
 const rateLimit = require('./middlewares/rateLimiter');
 const options = require('./utils/corsOptions');
 
-const { DATA_BASE_PROD, NODE_ENV } = process.env;
+const { NODE_ENV, MONGO_URL } = process.env;
 const { DATA_BASE_DEV } = require('./utils/constants');
 
 app.use('*', cors(options));
 
 mongoose.set('strictQuery', true);
-mongoose.connect(NODE_ENV === 'production' ? DATA_BASE_PROD : DATA_BASE_DEV);
+mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 app.listen(3000);
 app.use(bodyParser.json());
 app.use(rateLimit);
