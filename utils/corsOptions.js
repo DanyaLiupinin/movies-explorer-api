@@ -4,6 +4,7 @@ const options = {
     'https://praktikum.tk',
     'https://cinema-explorer.nomoredomains.club',
     'https://danyaliupinin.github.io',
+    'https://www.dkovandeveloper.online/',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
